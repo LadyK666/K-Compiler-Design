@@ -1,0 +1,416 @@
+﻿测试文件名,测试类型,文件路径,文件内容,MIPS代码输出,返回码,测试状态
+M01_arithmetic_instructions.txt,细粒度功能测试,mips_generation_tests\unit_tests\M01_arithmetic_instructions.txt,"""int a;
+int b;
+int c;
+{
+    a = 10;
+    b = 20;
+    c = a + b;
+    c = a - b;
+    c = a * b;
+    c = a / b;
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -16   # allocate 16 bytes
+
+    li $t9, 10       # load constant
+    move $s0, $t9       # a = 10
+    li $t9, 20       # load constant
+    move $s1, $t9       # b = 20
+    add $t0, $s0, $s1   # t0 = a + b
+    move $s2, $t0       # c = t0
+    sub $t1, $s0, $s1   # t1 = a - b
+    move $s2, $t1       # c = t1
+    mul $t2, $s0, $s1   # t2 = a * b
+    move $s2, $t2       # c = t2
+    div $t3, $s0, $s1   # t3 = a / b
+    move $s2, $t3       # c = t3
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 16    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+M02_comparison_instructions.txt,细粒度功能测试,mips_generation_tests\unit_tests\M02_comparison_instructions.txt,"""int a;
+int b;
+int c;
+{
+    a = 10;
+    b = 20;
+    c = a == b;
+    c = a != b;
+    c = a > b;
+    c = a >= b;
+    c = a < b;
+    c = a <= b;
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -16   # allocate 16 bytes
+
+    li $t9, 10       # load constant
+    move $s0, $t9       # a = 10
+    li $t9, 20       # load constant
+    move $s1, $t9       # b = 20
+    seq $t0, $s0, $s1   # t0 = (a == b)
+    move $s2, $t0       # c = t0
+    sne $t1, $s0, $s1   # t1 = (a != b)
+    move $s2, $t1       # c = t1
+    sgt $t2, $s0, $s1   # t2 = (a > b)
+    move $s2, $t2       # c = t2
+    sge $t3, $s0, $s1   # t3 = (a >= b)
+    move $s2, $t3       # c = t3
+    slt $t4, $s0, $s1   # t4 = (a < b)
+    move $s2, $t4       # c = t4
+    sle $t5, $s0, $s1   # t5 = (a <= b)
+    move $s2, $t5       # c = t5
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 16    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+M03_assignment_instructions.txt,细粒度功能测试,mips_generation_tests\unit_tests\M03_assignment_instructions.txt,"""int a;
+int b;
+{
+    a = 10;
+    b = a;
+    a = b + 5;
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -12   # allocate 12 bytes
+
+    li $t9, 10       # load constant
+    move $s0, $t9       # a = 10
+    move $s1, $s0       # b = a
+    li $t9, 5       # load constant
+    add $t0, $s1, $t9   # t0 = b + 5
+    move $s0, $t0       # a = t0
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 12    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+M04_control_flow.txt,细粒度功能测试,mips_generation_tests\unit_tests\M04_control_flow.txt,"""int a;
+int b;
+int i;
+{
+    a = 10;
+    if (a > 5) {
+        b = 1;
+    } else {
+        b = 0;
+    }
+    
+    i = 0;
+    while (i < 10) {
+        i++;
+    }
+    
+    for (i = 0; i < 5; i++) {
+        b = b + i;
+    }
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -12   # allocate 12 bytes
+
+    li $t9, 10       # load constant
+    move $s0, $t9       # a = 10
+    move $s1, $s0       # b = a
+    li $t9, 5       # load constant
+    add $t0, $s1, $t9   # t0 = b + 5
+    move $s0, $t0       # a = t0
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 12    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+M05_register_allocation.txt,细粒度功能测试,mips_generation_tests\unit_tests\M05_register_allocation.txt,"""int a;
+int b;
+int c;
+int d;
+int e;
+int f;
+int g;
+int h;
+int i;
+int j;
+int k;
+int l;
+int m;
+int n;
+int o;
+int p;
+int q;
+int r;
+int s;
+int t;
+{
+    a = 1;
+    b = 2;
+    c = 3;
+    d = 4;
+    e = 5;
+    f = 6;
+    g = 7;
+    h = 8;
+    i = 9;
+    j = 10;
+    k = 11;
+    l = 12;
+    m = 13;
+    n = 14;
+    o = 15;
+    p = 16;
+    q = 17;
+    r = 18;
+    s = 19;
+    t = 20;
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -84   # allocate 84 bytes
+
+    li $t9, 1       # load constant
+    move $s0, $t9       # a = 1
+    li $t9, 2       # load constant
+    move $s1, $t9       # b = 2
+    li $t9, 3       # load constant
+    move $s2, $t9       # c = 3
+    li $t9, 4       # load constant
+    move $s3, $t9       # d = 4
+    li $t9, 5       # load constant
+    move $s4, $t9       # e = 5
+    li $t9, 6       # load constant
+    move $s5, $t9       # f = 6
+    li $t9, 7       # load constant
+    move $s6, $t9       # g = 7
+    li $t9, 8       # load constant
+    move $s7, $t9       # h = 8
+    li $t9, 9       # load constant
+    sw $s0, 4($sp)   # spill a
+    move $s0, $t9       # i = 9
+    li $t9, 10       # load constant
+    sw $s1, 8($sp)   # spill b
+    move $s1, $t9       # j = 10
+    li $t9, 11       # load constant
+    sw $s2, 12($sp)   # spill c
+    move $s2, $t9       # k = 11
+    li $t9, 12       # load constant
+    sw $s3, 16($sp)   # spill d
+    move $s3, $t9       # l = 12
+    li $t9, 13       # load constant
+    sw $s4, 20($sp)   # spill e
+    move $s4, $t9       # m = 13
+    li $t9, 14       # load constant
+    sw $s5, 24($sp)   # spill f
+    move $s5, $t9       # n = 14
+    li $t9, 15       # load constant
+    sw $s6, 28($sp)   # spill g
+    move $s6, $t9       # o = 15
+    li $t9, 16       # load constant
+    sw $s7, 32($sp)   # spill h
+    move $s7, $t9       # p = 16
+    li $t9, 17       # load constant
+    sw $s0, 36($sp)   # spill i
+    move $s0, $t9       # q = 17
+    li $t9, 18       # load constant
+    sw $s1, 40($sp)   # spill j
+    move $s1, $t9       # r = 18
+    li $t9, 19       # load constant
+    sw $s2, 44($sp)   # spill k
+    move $s2, $t9       # s = 19
+    li $t9, 20       # load constant
+    sw $s3, 48($sp)   # spill l
+    move $s3, $t9       # t = 20
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 84    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+M06_stack_management.txt,细粒度功能测试,mips_generation_tests\unit_tests\M06_stack_management.txt,"""int a;
+int b;
+int c;
+int d;
+int e;
+{
+    a = 10;
+    b = 20;
+    c = 30;
+    d = 40;
+    e = 50;
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -24   # allocate 24 bytes
+
+    li $t9, 10       # load constant
+    move $s0, $t9       # a = 10
+    li $t9, 20       # load constant
+    move $s1, $t9       # b = 20
+    li $t9, 30       # load constant
+    move $s2, $t9       # c = 30
+    li $t9, 40       # load constant
+    move $s3, $t9       # d = 40
+    li $t9, 50       # load constant
+    move $s4, $t9       # e = 50
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 24    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+M07_io_syscalls.txt,细粒度功能测试,mips_generation_tests\unit_tests\M07_io_syscalls.txt,"""int a;
+int b;
+{
+    scan a;
+    b = a + 10;
+    print b;
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -12   # allocate 12 bytes
+
+    li $v0, 5         # syscall: read_int
+    syscall
+    move $s0, $v0      # a = input
+    li $t9, 10       # load constant
+    add $t0, $s0, $t9   # t0 = a + 10
+    move $s1, $t0       # b = t0
+    move $a0, $s1      # prepare to print b
+    li $v0, 1         # syscall: print_int
+    syscall
+    li $v0, 11        # syscall: print_char
+    li $a0, 10        # newline
+    syscall
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 12    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功
+I01_complete_program.txt,综合测试,mips_generation_tests\integration_tests\I01_complete_program.txt,"""int a;
+int b;
+int c;
+int arr[10];
+int i;
+int sum;
+
+{
+    a = 10;
+    b = 20;
+    c = a + b;
+    
+    arr[0] = 5;
+    arr[1] = 10;
+    
+    if (c > 25) {
+        sum = 0;
+        for (i = 0; i < 10; i++) {
+            sum = sum + arr[i];
+            if (sum > 50) {
+                break;
+            }
+        }
+        print sum;
+    } else {
+        while (i < 5) {
+            i++;
+            if (i == 3) {
+                continue;
+            }
+        }
+    }
+}""","""# MIPS Assembly Code
+# Generated from optimized TAC
+# Target: MARS/QTSPIM simulator
+
+.data
+    newline: .asciiz """"\n""""
+
+.text
+.globl main
+
+main:
+    # Prologue: allocate stack frame
+    addiu $sp, $sp, -12   # allocate 12 bytes
+
+    li $v0, 5         # syscall: read_int
+    syscall
+    move $s0, $v0      # a = input
+    li $t9, 10       # load constant
+    add $t0, $s0, $t9   # t0 = a + 10
+    move $s1, $t0       # b = t0
+    move $a0, $s1      # prepare to print b
+    li $v0, 1         # syscall: print_int
+    syscall
+    li $v0, 11        # syscall: print_char
+    li $a0, 10        # newline
+    syscall
+
+    # Epilogue: restore stack and exit
+    addiu $sp, $sp, 12    # deallocate stack
+    li $v0, 10            # syscall: exit
+    syscall""",,成功

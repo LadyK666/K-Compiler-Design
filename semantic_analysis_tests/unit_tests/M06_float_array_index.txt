@@ -1,0 +1,8 @@
+int arr[10];
+float f;
+{
+    f = 1.5;
+    int x ;
+    x = arr[f];
+}
+

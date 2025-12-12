@@ -1,0 +1,6 @@
+int a; /* This is a block comment */
+float b; /* Multi-line
+block comment */
+/* Standalone comment */
+int c; /* Comment with code */
+

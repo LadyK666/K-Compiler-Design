@@ -1,0 +1,315 @@
+﻿测试文件名,测试类型,文件路径,文件内容,原始TAC输出,返回码,测试状态
+T01_arithmetic_expressions.txt,细粒度功能测试,tac_generation_tests\unit_tests\T01_arithmetic_expressions.txt,"""int a;
+int b;
+int c;
+a = 0;
+b = 1;
+c = 2;
+{
+    c = a + b;
+    c = a - b;
+    c = a * b;
+    c = a / b;
+}""","""// decl a
+// decl b
+// decl c
+a = 0
+b = 1
+c = 2
+t0 = a + b
+c = t0
+t1 = a - b
+c = t1
+t2 = a * b
+c = t2
+t3 = a / b
+c = t3""",,成功
+T02_comparison_expressions.txt,细粒度功能测试,tac_generation_tests\unit_tests\T02_comparison_expressions.txt,"""int a;
+int b;
+int c;
+a = 0;
+b = 1;
+c = 2;
+{
+    c = a == b;
+    c = a != b;
+    c = a > b;
+    c = a >= b;
+    c = a < b;
+    c = a <= b;
+}""","""// decl a
+// decl b
+// decl c
+a = 0
+b = 1
+c = 2
+t0 = a == b
+c = t0
+t1 = a != b
+c = t1
+t2 = a > b
+c = t2
+t3 = a >= b
+c = t3
+t4 = a < b
+c = t4
+t5 = a <= b
+c = t5""",,成功
+T03_assignment.txt,细粒度功能测试,tac_generation_tests\unit_tests\T03_assignment.txt,"""int a;
+int b;
+{
+    a = 10;
+    b = a;
+    a = b + 5;
+}""","""// decl a
+// decl b
+a = 10
+b = a
+t0 = b + 5
+a = t0""",,成功
+T04_compound_assignment.txt,细粒度功能测试,tac_generation_tests\unit_tests\T04_compound_assignment.txt,"""int a;
+{
+    a = 10;
+    a += 5;
+    a -= 3;
+    a *= 2;
+    a /= 4;
+}""","""// decl a
+a = 10
+a += 5
+a -= 3
+a *= 2
+a /= 4""",,成功
+T05_increment_decrement.txt,细粒度功能测试,tac_generation_tests\unit_tests\T05_increment_decrement.txt,"""int a;
+{
+    a = 10;
+    a++;
+    a--;
+    ++a;
+    --a;
+}""","""// decl a
+a = 10
+a ++
+a --
+a ++
+a --""",,成功
+T06_if_statement.txt,细粒度功能测试,tac_generation_tests\unit_tests\T06_if_statement.txt,"""int a;
+int b;
+{
+    a = 10;
+    if (a > 0) {
+        b = 1;
+    } else {
+        b = 0;
+    }
+}""","""// decl a
+// decl b
+a = 10
+t0 = a > 0
+if t0 goto L0
+goto L2
+L0:
+b = 1
+goto L1
+L2:
+b = 0
+L1:""",,成功
+T07_while_statement.txt,细粒度功能测试,tac_generation_tests\unit_tests\T07_while_statement.txt,"""int i;
+int sum;
+{
+    i = 0;
+    sum = 0;
+    while (i < 10) {
+        sum = sum + i;
+        i++;
+    }
+}""","""// decl i
+// decl sum
+i = 0
+sum = 0
+L0:
+t0 = i < 10
+if t0 goto L1
+goto L2
+L1:
+t1 = sum + i
+sum = t1
+i ++
+goto L0
+L2:""",,成功
+T08_for_statement.txt,细粒度功能测试,tac_generation_tests\unit_tests\T08_for_statement.txt,"""int i;
+int sum;
+{
+    sum = 0;
+    for (i = 0; i < 10; i++;) {
+        sum = sum + i;
+    }
+}""","""// decl i
+// decl sum
+sum = 0
+i = 0
+L0:
+t0 = i < 10
+if t0 goto L1
+goto L3
+L1:
+t1 = sum + i
+sum = t1
+L2:
+i ++
+goto L0
+L3:""",,成功
+T09_break_continue.txt,细粒度功能测试,tac_generation_tests\unit_tests\T09_break_continue.txt,"""int i;
+int sum;
+{
+    sum = 0;
+    for (i = 0; i < 10; i++;) {
+        if (i == 5) {
+            break;
+        }
+        if (i == 3) {
+            continue;
+        }
+        sum = sum + i;
+    }
+}""","""// decl i
+// decl sum
+sum = 0
+i = 0
+L0:
+t0 = i < 10
+if t0 goto L1
+goto L3
+L1:
+t1 = i == 5
+if t1 goto L4
+goto L5
+L4:
+goto L3
+L5:
+t2 = i == 3
+if t2 goto L6
+goto L7
+L6:
+goto L2
+L7:
+t3 = sum + i
+sum = t3
+L2:
+i ++
+goto L0
+L3:""",,成功
+T10_array_access.txt,细粒度功能测试,tac_generation_tests\unit_tests\T10_array_access.txt,"""int arr[10];
+int i;
+int x;
+{
+    i = 0;
+    arr[i] = 10;
+    x = arr[i];
+    arr[5] = 20;
+    x = arr[5];
+}""","""// decl arr
+// decl i
+// decl x
+i = 0
+arr[i] = 10
+x = arr[i]
+arr[5] = 20
+x = arr[5]""",,成功
+T11_io_statements.txt,细粒度功能测试,tac_generation_tests\unit_tests\T11_io_statements.txt,"""int a;
+int b;
+{
+    scan a;
+    b = a + 10;
+    print b;
+}""","""// decl a
+// decl b
+scan a
+t0 = a + 10
+b = t0
+print b""",,成功
+I01_complete_program.txt,综合测试,tac_generation_tests\integration_tests\I01_complete_program.txt,"""int a;
+int b;
+int c;
+int arr[10];
+int i;
+int sum;
+
+{
+    a = 10;
+    b = 20;
+    c = a + b;
+    
+    arr[0] = 5;
+    arr[1] = 10;
+    
+    if (c > 25) {
+        sum = 0;
+        for (i = 0; i < 10; i++;) {
+            sum = sum + arr[i];
+            if (sum > 50) {
+                break;
+            }
+        }
+        print sum;
+    } else {
+        while (i < 5) {
+            i++;
+            if (i == 3) {
+                continue;
+            }
+        }
+    }
+}""","""// decl a
+// decl b
+// decl c
+// decl arr
+// decl i
+// decl sum
+a = 10
+b = 20
+t0 = a + b
+c = t0
+arr[0] = 5
+arr[1] = 10
+t1 = c > 25
+if t1 goto L0
+goto L2
+L0:
+sum = 0
+i = 0
+L3:
+t2 = i < 10
+if t2 goto L4
+goto L6
+L4:
+t3 = sum + arr[i]
+sum = t3
+t4 = sum > 50
+if t4 goto L7
+goto L8
+L7:
+goto L6
+L8:
+L5:
+i ++
+goto L3
+L6:
+print sum
+goto L1
+L2:
+L9:
+t5 = i < 5
+if t5 goto L10
+goto L11
+L10:
+i ++
+t6 = i == 3
+if t6 goto L12
+goto L13
+L12:
+goto L9
+L13:
+goto L9
+L11:
+L1:""",,成功

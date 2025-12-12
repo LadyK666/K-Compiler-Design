@@ -1,0 +1,21 @@
+int a;
+int b;
+int i;
+{
+    a = 10;
+    if (a > 5) {
+        b = 1;
+    } else {
+        b = 0;
+    }
+    
+    i = 0;
+    while (i < 10) {
+        i++;
+    }
+    
+    for (i = 0; i < 5; i++) {
+        b = b + i;
+    }
+}
+

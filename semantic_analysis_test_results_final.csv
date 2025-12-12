@@ -1,0 +1,366 @@
+﻿测试文件名,测试类型,文件路径,文件内容,语义分析输出,返回码,测试状态
+M01_duplicate_declaration.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M01_duplicate_declaration.txt,"""int a;
+int a;""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[语义错误] 重复定义标识符
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M02_undeclared_variable.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M02_undeclared_variable.txt,"""int a;
+{
+    b = 10;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] 使用了未声明的变量
+[语义错误] 赋值左侧不是可赋值表达式
+[语义错误] 赋值操作数必须是数值类型
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 3
+[跳过代码生成] 语义错误数: 3""",,失败/错误
+M03_uninitialized_variable.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M03_uninitialized_variable.txt,"""int a;
+int b;
+{
+    b = a;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 声明变量 b 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] 变量在初始化前被使用
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M04_array_dimension_zero.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M04_array_dimension_zero.txt,int arr[0];,"""[符号表] 进入作用域 level=0
+[语义错误] 数组维度必须为正整数
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M05_non_array_subscript.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M05_non_array_subscript.txt,"""int a;
+int b;
+{
+    b = a[0];
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 声明变量 b 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] 变量在初始化前被使用
+[语义错误] 对非数组对象使用下标
+[语义错误] 赋值操作数必须是数值类型
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 3
+[跳过代码生成] 语义错误数: 3""",,失败/错误
+M06_float_array_index.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M06_float_array_index.txt,"""int arr[10];
+float f;
+{
+    f = 1.5;
+    int x ;
+    x = arr[f];
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 声明变量 f 类型=float
+[符号表] 进入作用域 level=1
+[符号表] 声明变量 x 类型=int
+[语义错误] 变量在初始化前被使用
+[语义错误] 数组下标不能是浮点数
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 2
+[跳过代码生成] 语义错误数: 2""",,失败/错误
+M07_array_as_index.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M07_array_as_index.txt,"""int arr1[10];
+int arr2[10];
+arr1[0] = 1;
+arr2[0] = 2;
+{
+    int x;
+    x = arr1[arr2];
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr1 类型=int 维度=1
+[符号表] 声明数组 arr2 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[符号表] 声明变量 x 类型=int
+[语义错误] 数组下标必须是整型表达式
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M08_array_arithmetic.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M08_array_arithmetic.txt,"""int arr1[10];
+int arr2[10];
+arr1[0] = 1;
+arr2[0] = 2;
+{
+    int x;
+    x = arr1 + arr2;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr1 类型=int 维度=1
+[符号表] 声明数组 arr2 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[符号表] 声明变量 x 类型=int
+[语义错误] 数组不能直接参与算术运算
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M09_array_comparison.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M09_array_comparison.txt,"""int arr1[10];
+int arr2[10];
+arr1[0] = 1;
+arr2[0] = 2;
+{
+    if (arr1 == arr2) {
+        int x;
+        x = 0;
+    }
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr1 类型=int 维度=1
+[符号表] 声明数组 arr2 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] 数组不能直接参与比较
+[符号表] 进入作用域 level=2
+[符号表] 声明变量 x 类型=int
+[符号表] 离开作用域 level=2
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M10_array_assignment.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M10_array_assignment.txt,"""int arr[10];
+{
+    arr = 5;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] 不能直接给数组整体赋值
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M11_non_lvalue_assignment.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M11_non_lvalue_assignment.txt,"""int a;
+int b;
+{
+    a + b = 10;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 声明变量 b 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] 变量在初始化前被使用
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M12_float_to_int.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M12_float_to_int.txt,"""int a;
+float f;
+{
+    f = 3.14;
+    a = f;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 声明变量 f 类型=float
+[符号表] 进入作用域 level=1
+[语义错误] 不允许将 float 赋给 int
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M13_int_to_char.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M13_int_to_char.txt,"""char c;
+int x;
+{
+    x = 65;
+    c = x;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 c 类型=char
+[符号表] 声明变量 x 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] 只能向 char 赋 char 值
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M14_non_lvalue_increment.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M14_non_lvalue_increment.txt,"""int a;
+int b;
+{
+    (a + b)++;
+}""",语法错误,,失败/错误
+M15_array_increment.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M15_array_increment.txt,"""int arr[10];
+arr[0] = 1;
+{
+    arr++;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] 不能对数组整体自增自减
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M16_if_array_condition.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M16_if_array_condition.txt,"""int arr[10];
+arr[0] = 1;
+{
+    if (arr) {
+        int x;
+        x = 0;
+    }
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] if 条件应为数值/布尔表达式
+[符号表] 进入作用域 level=2
+[符号表] 声明变量 x 类型=int
+[符号表] 离开作用域 level=2
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M17_while_array_condition.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M17_while_array_condition.txt,"""int arr[10];
+arr[0] = 1;
+{
+    while (arr) {
+        int x;
+        x = 0;
+    }
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] while 条件应为数值/布尔表达式
+[符号表] 进入作用域 level=2
+[符号表] 声明变量 x 类型=int
+[符号表] 离开作用域 level=2
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M18_for_array_condition.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M18_for_array_condition.txt,"""int arr[10];
+int i;
+arr[0] = 1;
+{
+    for (i = 0; arr; i++;) {
+        int x;
+        x = 0;
+    }
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 声明变量 i 类型=int
+[符号表] 进入作用域 level=1
+[符号表] 进入作用域 level=2
+[语义错误] for条件应为数值/布尔表达式
+[符号表] 进入作用域 level=3
+[符号表] 声明变量 x 类型=int
+[符号表] 离开作用域 level=3
+[符号表] 离开作用域 level=2
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M19_break_outside_loop.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M19_break_outside_loop.txt,"""int a;
+{
+    break;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] break 只能出现在循环内部
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M20_continue_outside_loop.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M20_continue_outside_loop.txt,"""int a;
+{
+    continue;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 进入作用域 level=1
+[语义错误] continue 只能出现在循环内部
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M21_print_array.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M21_print_array.txt,"""int arr[10];
+arr[0] = 1;
+{
+    print arr;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] print 不支持直接输出数组
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M22_scan_undeclared.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M22_scan_undeclared.txt,"""{
+    scan x;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 进入作用域 level=1
+[语义错误] scan 作用于未声明变量
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+M23_scan_array.txt,细粒度功能测试,semantic_analysis_tests\unit_tests\M23_scan_array.txt,"""int arr[10];
+arr[0] = 1;
+{
+    scan arr;
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 进入作用域 level=1
+[语义错误] scan 不支持对整个数组操作
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 1
+[跳过代码生成] 语义错误数: 1""",,失败/错误
+I01_semantically_correct.txt,综合测试,semantic_analysis_tests\integration_tests\I01_semantically_correct.txt,"""int a;
+int b;
+int c;
+int arr[10];
+int i;
+int sum;
+
+{
+    a = 10;
+    b = 20;
+    c = a + b;
+    
+    arr[0] = 5;
+    arr[1] = 10;
+    
+    if (c > 25) {
+        sum = 0;
+        for (i = 0; i < 10; i++;) {
+            sum = sum + arr[i];//显然这里静态语义是检查不了数组越界的
+            if (sum > 50) {
+                break;
+            }
+        }
+        print sum;
+    } else {
+        while (i < 5) {
+            i++;
+            if (i == 3) {
+                continue;
+            }
+        }
+    }
+}""","""[符号表] 进入作用域 level=0
+[符号表] 声明变量 a 类型=int
+[符号表] 声明变量 b 类型=int
+[符号表] 声明变量 c 类型=int
+[符号表] 声明数组 arr 类型=int 维度=1
+[符号表] 声明变量 i 类型=int
+[符号表] 声明变量 sum 类型=int
+[符号表] 进入作用域 level=1
+[符号表] 进入作用域 level=2
+[符号表] 进入作用域 level=3
+[符号表] 进入作用域 level=4
+[符号表] 进入作用域 level=5
+[符号表] 离开作用域 level=5
+[符号表] 离开作用域 level=4
+[符号表] 离开作用域 level=3
+[符号表] 离开作用域 level=2
+[符号表] 进入作用域 level=2
+[符号表] 进入作用域 level=3
+[符号表] 进入作用域 level=4
+[符号表] 离开作用域 level=4
+[符号表] 离开作用域 level=3
+[符号表] 离开作用域 level=2
+[符号表] 离开作用域 level=1
+[符号表] 离开作用域 level=0
+[语义检查完成] 发现错误数量: 0""",,成功

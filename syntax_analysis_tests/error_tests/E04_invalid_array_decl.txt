@@ -1,0 +1,3 @@
+int arr[];
+int mat[5][];
+

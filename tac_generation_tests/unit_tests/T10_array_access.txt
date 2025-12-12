@@ -1,0 +1,11 @@
+int arr[10];
+int i;
+int x;
+{
+    i = 0;
+    arr[i] = 10;
+    x = arr[i];
+    arr[5] = 20;
+    x = arr[5];
+}
+

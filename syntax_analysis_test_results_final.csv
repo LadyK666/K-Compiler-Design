@@ -1,0 +1,493 @@
+﻿测试文件名,测试类型,文件路径,文件内容,语法分析输出,返回码,测试状态
+S01_variable_declaration.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S01_variable_declaration.txt,"""int a;
+float b;
+char c;
+int x;""","""变量声明(int)：a
+变量声明(float)：b
+变量声明(char)：c
+变量声明(int)：x""",,成功
+S02_array_declaration.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S02_array_declaration.txt,"""int arr[10];
+float mat[5][3];
+char str[100];
+int a[5];""","""数组声明(int)：arr
+    维度：
+        整型常量：10
+数组声明(float)：mat
+    维度：
+        整型常量：5
+        整型常量：3
+数组声明(char)：str
+    维度：
+        整型常量：100
+数组声明(int)：a
+    维度：
+        整型常量：5""",,成功
+S03_arithmetic_expressions.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S03_arithmetic_expressions.txt,"""int a;
+int b;
+int c;
+{
+    c = a + b;
+    c = a - b;
+    c = a * b;
+    c = a / b;
+}""","""变量声明(int)：a
+变量声明(int)：b
+变量声明(int)：c
+表达式语句：
+    =
+        变量：c
+        +
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        -
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        *
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        /
+            变量：a
+            变量：b""",,成功
+S04_comparison_expressions.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S04_comparison_expressions.txt,"""int a;
+int b;
+int c;
+{
+    c = a == b;
+    c = a != b;
+    c = a > b;
+    c = a >= b;
+    c = a < b;
+    c = a <= b;
+}""","""变量声明(int)：a
+变量声明(int)：b
+变量声明(int)：c
+表达式语句：
+    =
+        变量：c
+        ==
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        !=
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        >
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        >=
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        <
+            变量：a
+            变量：b
+表达式语句：
+    =
+        变量：c
+        <=
+            变量：a
+            变量：b""",,成功
+S05_assignment_expressions.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S05_assignment_expressions.txt,"""int a;
+int b;
+{
+    a = 10;
+    b = a;
+    a = b + 5;
+}""","""变量声明(int)：a
+变量声明(int)：b
+表达式语句：
+    =
+        变量：a
+        整型常量：10
+表达式语句：
+    =
+        变量：b
+        变量：a
+表达式语句：
+    =
+        变量：a
+        +
+            变量：b
+            整型常量：5""",,成功
+S06_compound_assignment.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S06_compound_assignment.txt,"""int a;
+{
+    a += 5;
+    a -= 3;
+    a *= 2;
+    a /= 4;
+}""","""变量声明(int)：a
+表达式语句：
+    +=
+        变量：a
+        整型常量：5
+表达式语句：
+    -=
+        变量：a
+        整型常量：3
+表达式语句：
+    *=
+        变量：a
+        整型常量：2
+表达式语句：
+    /=
+        变量：a
+        整型常量：4""",,成功
+S07_increment_decrement.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S07_increment_decrement.txt,"""int a;
+a = 0;
+{
+    a++;
+    a--;
+    ++a;
+    --a;
+}""","""变量声明(int)：a
+表达式语句：
+    =
+        变量：a
+        整型常量：0
+表达式语句：
+    ++
+        变量：a
+表达式语句：
+    --
+        变量：a
+表达式语句：
+    ++
+        变量：a
+表达式语句：
+    --
+        变量：a""",,成功
+S08_if_statement.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S08_if_statement.txt,"""int a;
+int b;
+a = 1;
+{
+    if (a > 0) {
+        b = 1;
+    }
+    if (a == 0) {
+        b = 0;
+    } else {
+        b = -1;
+    }
+}""","""变量声明(int)：a
+变量声明(int)：b
+表达式语句：
+    =
+        变量：a
+        整型常量：1
+条件语句(if_then)：
+    条件：
+        >
+            变量：a
+            整型常量：0
+    if子句：
+        表达式语句：
+            =
+                变量：b
+                整型常量：1
+条件语句(if_then_else)：
+    条件：
+        ==
+            变量：a
+            整型常量：0
+    if子句：
+        表达式语句：
+            =
+                变量：b
+                整型常量：0
+    else子句：
+        表达式语句：
+            =
+                变量：b
+                单目-
+                    整型常量：1""",,成功
+S09_while_statement.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S09_while_statement.txt,"""int i;
+int sum;
+{
+    i = 0;
+    sum = 0;
+    while (i < 10) {
+        sum = sum + i;
+        i++;
+    }
+}""","""变量声明(int)：i
+变量声明(int)：sum
+表达式语句：
+    =
+        变量：i
+        整型常量：0
+表达式语句：
+    =
+        变量：sum
+        整型常量：0
+循环语句：
+    条件：
+        <
+            变量：i
+            整型常量：10
+    循环体：
+        表达式语句：
+            =
+                变量：sum
+                +
+                    变量：sum
+                    变量：i
+        表达式语句：
+            ++
+                变量：i""",,成功
+S10_for_statement.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S10_for_statement.txt,"""int i;
+int sum;
+{
+    sum = 0;
+    for (i = 0; i < 10; i++;) {
+        sum = sum + i;
+    }
+}""","""变量声明(int)：i
+变量声明(int)：sum
+表达式语句：
+    =
+        变量：sum
+        整型常量：0
+循环语句(for)：
+    初始化：
+        表达式语句：
+            =
+                变量：i
+                整型常量：0
+    条件：
+        <
+            变量：i
+            整型常量：10
+    更新：
+        表达式语句：
+            ++
+                变量：i
+    循环体：
+        表达式语句：
+            =
+                变量：sum
+                +
+                    变量：sum
+                    变量：i""",,成功
+S11_break_continue.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S11_break_continue.txt,"""int i;
+i = 1;
+
+{
+    while (i < 10) {
+        if (i == 5) {
+            break;
+        }
+        if (i == 3) {
+            continue;
+        }
+        i++;
+    }
+}""","""变量声明(int)：i
+表达式语句：
+    =
+        变量：i
+        整型常量：1
+循环语句：
+    条件：
+        <
+            变量：i
+            整型常量：10
+    循环体：
+        条件语句(if_then)：
+            条件：
+                ==
+                    变量：i
+                    整型常量：5
+            if子句：
+                break语句
+        条件语句(if_then)：
+            条件：
+                ==
+                    变量：i
+                    整型常量：3
+            if子句：
+                continue语句
+        表达式语句：
+            ++
+                变量：i""",,成功
+S12_compound_statement.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S12_compound_statement.txt,"""int a;
+int b;
+{
+    a = 10;
+    {
+        b = 20;
+        {
+            a = a + b;
+        }
+    }
+}""","""变量声明(int)：a
+变量声明(int)：b
+表达式语句：
+    =
+        变量：a
+        整型常量：10
+表达式语句：
+    =
+        变量：b
+        整型常量：20
+表达式语句：
+    =
+        变量：a
+        +
+            变量：a
+            变量：b""",,成功
+S13_io_statements.txt,细粒度功能测试,syntax_analysis_tests\unit_tests\S13_io_statements.txt,"""int a;
+int b;
+{
+    scan a;
+    b = a + 10;
+    print b;
+}""","""变量声明(int)：a
+变量声明(int)：b
+输入变量：a
+表达式语句：
+    =
+        变量：b
+        +
+            变量：a
+            整型常量：10
+输出表达式:
+    变量：b""",,成功
+E01_missing_semicolon.txt,异常代码测试,syntax_analysis_tests\error_tests\E01_missing_semicolon.txt,"""int a
+int b;""","""Grammar Error at Line 2 Column 1: syntax error, unexpected TYPE_INT, expecting SEMI or LB.""",,失败/错误
+E02_mismatched_braces.txt,异常代码测试,syntax_analysis_tests\error_tests\E02_mismatched_braces.txt,"""int a;
+{
+    a = 10;
+)""","""Grammar Error at Line 4 Column 1: syntax error, unexpected RP, expecting RC.""",,失败/错误
+E03_missing_expression.txt,异常代码测试,syntax_analysis_tests\error_tests\E03_missing_expression.txt,"""int a;
+{
+    a = ;
+}""","""Grammar Error at Line 3 Column 9: syntax error, unexpected SEMI.""",,失败/错误
+E04_invalid_array_decl.txt,异常代码测试,syntax_analysis_tests\error_tests\E04_invalid_array_decl.txt,"""int arr[];
+int mat[5][];""","""Grammar Error at Line 1 Column 9: syntax error, unexpected RB, expecting INT.""",,失败/错误
+E05_missing_keyword.txt,异常代码测试,syntax_analysis_tests\error_tests\E05_missing_keyword.txt,"""int a;
+(a > 0) {
+    a = 10;
+}""","""Grammar Error at Line 2 Column 9: syntax error, unexpected LC.""",,失败/错误
+I01_complete_program.txt,综合测试,syntax_analysis_tests\integration_tests\I01_complete_program.txt,"""int a;
+int b;
+int c;
+int i;
+int sum;
+
+{
+    a = 10;
+    b = 20;
+    c = a + b;
+    
+    if (c > 25) {
+        sum = 0;
+        for (i = 0; i < 10; i++;) {
+            sum = sum + i;
+            if (sum > 20) {
+                break;
+            }
+        }
+        print sum;
+    } else {
+        while (i < 5) {
+            i++;
+            if (i == 3) {
+                continue;
+            }
+        }
+    }
+}""","""变量声明(int)：a
+变量声明(int)：b
+变量声明(int)：c
+变量声明(int)：i
+变量声明(int)：sum
+表达式语句：
+    =
+        变量：a
+        整型常量：10
+表达式语句：
+    =
+        变量：b
+        整型常量：20
+表达式语句：
+    =
+        变量：c
+        +
+            变量：a
+            变量：b
+条件语句(if_then_else)：
+    条件：
+        >
+            变量：c
+            整型常量：25
+    if子句：
+        表达式语句：
+            =
+                变量：sum
+                整型常量：0
+        循环语句(for)：
+            初始化：
+                表达式语句：
+                    =
+                        变量：i
+                        整型常量：0
+            条件：
+                <
+                    变量：i
+                    整型常量：10
+            更新：
+                表达式语句：
+                    ++
+                        变量：i
+            循环体：
+                表达式语句：
+                    =
+                        变量：sum
+                        +
+                            变量：sum
+                            变量：i
+                条件语句(if_then)：
+                    条件：
+                        >
+                            变量：sum
+                            整型常量：20
+                    if子句：
+                        break语句
+        输出表达式:
+            变量：sum
+    else子句：
+        循环语句：
+            条件：
+                <
+                    变量：i
+                    整型常量：5
+            循环体：
+                表达式语句：
+                    ++
+                        变量：i
+                条件语句(if_then)：
+                    条件：
+                        ==
+                            变量：i
+                            整型常量：3
+                    if子句：
+                        continue语句""",,成功

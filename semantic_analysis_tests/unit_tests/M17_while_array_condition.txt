@@ -1,0 +1,9 @@
+int arr[10];
+arr[0] = 1;
+{
+    while (arr) {
+        int x;
+        x = 0;
+    }
+}
+

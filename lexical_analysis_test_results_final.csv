@@ -1,0 +1,296 @@
+﻿测试文件名,测试类型,文件路径,文件内容,词法分析输出,返回码,测试状态
+L01_keywords.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L01_keywords.txt,int float char if else while for break continue scan print,"""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_INT(类型)          -                    int
+1      TYPE_FLOAT(类型)        -                    float
+1      TYPE_CHAR(类型)         -                    char
+1      IF(关键字)             -                    if
+1      ELSE(关键字)           -                    else
+1      WHILE(关键字)          -                    while
+1      FOR(关键字)            -                    for
+1      BREAK(关键字)          -                    break
+1      CONTINUE(关键字)       -                    continue
+1      SCAN(关键字)           -                    scan
+1      PRINT(关键字)          -                    print
+-------------------------------------------------------------------
+共识别 11 个token
+========================""",,成功
+L02_identifiers.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L02_identifiers.txt,"""a
+abc
+a1
+a1b2c3
+variable_name
+var123
+_underscore
+UPPERCASE
+MixedCase""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      ID(标识符)             a                    a
+2      ID(标识符)             abc                  abc
+3      ID(标识符)             a1                   a1
+4      ID(标识符)             a1b2c3               a1b2c3
+5      ID(标识符)             variable             variable
+5      ID(标识符)             name                 name
+6      ID(标识符)             var123               var123
+7      ID(标识符)             underscore           underscore
+8      ID(标识符)             UPPERCASE            UPPERCASE
+9      ID(标识符)             MixedCase            MixedCase
+-------------------------------------------------------------------
+共识别 10 个token
+========================""",,成功
+L03_integer_constants.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L03_integer_constants.txt,"""0
+1
+123
+999
+1000
+2147483647""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      INT(整数常量)         0                    0
+2      INT(整数常量)         1                    1
+3      INT(整数常量)         123                  123
+4      INT(整数常量)         999                  999
+5      INT(整数常量)         1000                 1000
+6      INT(整数常量)         2147483647           2147483647
+-------------------------------------------------------------------
+共识别 6 个token
+========================""",,成功
+L04_float_constants.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L04_float_constants.txt,"""0.0
+1.0
+3.14
+0.5
+123.456
+.5
+5.
+10.0""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      FLOAT(浮点常量)       0.00                 0.0
+2      FLOAT(浮点常量)       1.00                 1.0
+3      FLOAT(浮点常量)       3.14                 3.14
+4      FLOAT(浮点常量)       0.50                 0.5
+5      FLOAT(浮点常量)       123.46               123.456
+6      FLOAT(浮点常量)       0.50                 .5
+7      FLOAT(浮点常量)       5.00                 5.
+8      FLOAT(浮点常量)       10.00                10.0
+-------------------------------------------------------------------
+共识别 8 个token
+========================""",,成功
+L05_char_constants.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L05_char_constants.txt,"""'a'
+'b'
+'1'
+' '
+'\n'
+'\t'
+'\\'
+'\''""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      CHAR(字符常量)        a                    'a'
+2      CHAR(字符常量)        b                    'b'
+3      CHAR(字符常量)        1                    '1'
+4      CHAR(字符常量)                             ' '
+5      CHAR(字符常量)        
+                    '\n'
+6      CHAR(字符常量)        	                    '\t'
+7      CHAR(字符常量)        \                    '\\'
+8      CHAR(字符常量)        '                    '\''
+-------------------------------------------------------------------
+共识别 8 个token
+========================""",,成功
+L06_operators.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L06_operators.txt,+ - * / = == != > >= < <= += -= *= /= ++ --,"""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      PLUS(+)                   -                    +
+1      MINUS(-)                  -                    -
+1      STAR(*)                   -                    *
+1      DIV(/)                    -                    /
+1      ASSIGNOP(赋值)          -                    =
+1      EQ(==)                    -                    ==
+1      NE(!=)                    -                    !=
+1      GT(>)                     -                    >
+1      GE(>=)                    -                    >=
+1      LT(<)                     -                    <
+1      LE(<=)                    -                    <=
+1      PLUS_ASSIGN(+=)           -                    +=
+1      MINUS_ASSIGN(-=)          -                    -=
+1      STAR_ASSIGN(*=)           -                    *=
+1      DIV_ASSIGN(/=)            -                    /=
+1      INCREMENT(++)             -                    ++
+1      DECREMENT(--)             -                    --
+-------------------------------------------------------------------
+共识别 17 个token
+========================""",,成功
+L07_delimiters.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L07_delimiters.txt,"""{ } ( ) [ ] ; ,""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      LC(左大括号)          -                    {
+1      RC(右大括号)          -                    }
+1      LP(左小括号)          -                    (
+1      RP(右小括号)          -                    )
+1      LB(左中括号)          -                    [
+1      RB(右中括号)          -                    ]
+1      SEMI(分号)              -                    ;
+1      COMMA(逗号)             -                    ,
+-------------------------------------------------------------------
+共识别 8 个token
+========================""",,成功
+L08_line_comment.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L08_line_comment.txt,"""int a; // This is a line comment
+float b; // Another comment
+// Comment on its own line
+int c; // Comment at end""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_INT(类型)          -                    int
+1      ID(标识符)             a                    a
+1      SEMI(分号)              -                    ;
+2      TYPE_FLOAT(类型)        -                    float
+2      ID(标识符)             b                    b
+2      SEMI(分号)              -                    ;
+4      TYPE_INT(类型)          -                    int
+4      ID(标识符)             c                    c
+4      SEMI(分号)              -                    ;
+-------------------------------------------------------------------
+共识别 9 个token
+========================""",,成功
+L09_block_comment.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L09_block_comment.txt,"""int a; /* This is a block comment */
+float b; /* Multi-line
+block comment */
+/* Standalone comment */
+int c; /* Comment with code */""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_INT(类型)          -                    int
+1      ID(标识符)             a                    a
+1      SEMI(分号)              -                    ;
+2      TYPE_FLOAT(类型)        -                    float
+2      ID(标识符)             b                    b
+2      SEMI(分号)              -                    ;
+5      TYPE_INT(类型)          -                    int
+5      ID(标识符)             c                    c
+5      SEMI(分号)              -                    ;
+-------------------------------------------------------------------
+共识别 9 个token
+========================""",,成功
+L10_whitespace.txt,细粒度功能测试,lexical_analysis_tests\unit_tests\L10_whitespace.txt,"""int    a;
+float  b;
+char   c;
+int d;
+int	e;
+int
+f;""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_INT(类型)          -                    int
+1      ID(标识符)             a                    a
+1      SEMI(分号)              -                    ;
+2      TYPE_FLOAT(类型)        -                    float
+2      ID(标识符)             b                    b
+2      SEMI(分号)              -                    ;
+3      TYPE_CHAR(类型)         -                    char
+3      ID(标识符)             c                    c
+3      SEMI(分号)              -                    ;
+4      TYPE_INT(类型)          -                    int
+4      ID(标识符)             d                    d
+4      SEMI(分号)              -                    ;
+5      TYPE_INT(类型)          -                    int
+5      ID(标识符)             e                    e
+5      SEMI(分号)              -                    ;
+6      TYPE_INT(类型)          -                    int
+7      ID(标识符)             f                    f
+7      SEMI(分号)              -                    ;
+-------------------------------------------------------------------
+共识别 18 个token
+========================""",,成功
+E01_unrecognized_char.txt,异常代码测试,lexical_analysis_tests\error_tests\E01_unrecognized_char.txt,"""int a;
+@b = 10;""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_INT(类型)          -                    int
+1      ID(标识符)             a                    a
+1      SEMI(分号)              -                    ;
+2      ID(标识符)             b                    b
+2      ASSIGNOP(赋值)          -                    =
+2      INT(整数常量)         10                   10
+2      SEMI(分号)              -                    ;
+-------------------------------------------------------------------
+共识别 7 个token
+========================""",,成功
+E02_invalid_char_constant.txt,异常代码测试,lexical_analysis_tests\error_tests\E02_invalid_char_constant.txt,char c = 'abc';,"""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_CHAR(类型)         -                    char
+1      ID(标识符)             c                    c
+1      ASSIGNOP(赋值)          -                    =
+1      ID(标识符)             abc                  abc
+1      SEMI(分号)              -                    ;
+-------------------------------------------------------------------
+共识别 5 个token
+========================""",,成功
+E03_invalid_float.txt,异常代码测试,lexical_analysis_tests\error_tests\E03_invalid_float.txt,float f = 3.14.15;,"""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_FLOAT(类型)        -                    float
+1      ID(标识符)             f                    f
+1      ASSIGNOP(赋值)          -                    =
+1      FLOAT(浮点常量)       3.14                 3.14
+1      FLOAT(浮点常量)       0.15                 .15
+1      SEMI(分号)              -                    ;
+-------------------------------------------------------------------
+共识别 6 个token
+========================""",,成功
+I01_complete_program.txt,综合测试,lexical_analysis_tests\integration_tests\I01_complete_program.txt,"""int a;
+int b;
+int c;
+
+{
+    a = 10;
+    b = 20;
+    c = a + b;
+    if (c > 25) {
+        print c;
+    }
+}""","""===== 词法分析结果 =====
+行号 Token类型               Token值             词素
+-------------------------------------------------------------------
+1      TYPE_INT(类型)          -                    int
+1      ID(标识符)             a                    a
+1      SEMI(分号)              -                    ;
+2      TYPE_INT(类型)          -                    int
+2      ID(标识符)             b                    b
+2      SEMI(分号)              -                    ;
+3      TYPE_INT(类型)          -                    int
+3      ID(标识符)             c                    c
+3      SEMI(分号)              -                    ;
+5      LC(左大括号)          -                    {
+6      ID(标识符)             a                    a
+6      ASSIGNOP(赋值)          -                    =
+6      INT(整数常量)         10                   10
+6      SEMI(分号)              -                    ;
+7      ID(标识符)             b                    b
+7      ASSIGNOP(赋值)          -                    =
+7      INT(整数常量)         20                   20
+7      SEMI(分号)              -                    ;
+8      ID(标识符)             c                    c
+8      ASSIGNOP(赋值)          -                    =
+8      ID(标识符)             a                    a
+8      PLUS(+)                   -                    +
+8      ID(标识符)             b                    b
+8      SEMI(分号)              -                    ;
+9      IF(关键字)             -                    if
+9      LP(左小括号)          -                    (
+9      ID(标识符)             c                    c
+9      GT(>)                     -                    >
+9      INT(整数常量)         25                   25
+9      RP(右小括号)          -                    )
+9      LC(左大括号)          -                    {
+10     PRINT(关键字)          -                    print
+10     ID(标识符)             c                    c
+10     SEMI(分号)              -                    ;
+11     RC(右大括号)          -                    }
+12     RC(右大括号)          -                    }
+-------------------------------------------------------------------
+共识别 36 个token
+========================""",,成功

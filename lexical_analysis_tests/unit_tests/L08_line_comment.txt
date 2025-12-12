@@ -1,0 +1,5 @@
+int a; // This is a line comment
+float b; // Another comment
+// Comment on its own line
+int c; // Comment at end
+

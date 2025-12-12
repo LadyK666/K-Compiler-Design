@@ -1,0 +1,10 @@
+a
+abc
+a1
+a1b2c3
+variable_name
+var123
+_underscore
+UPPERCASE
+MixedCase
+

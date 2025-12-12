@@ -1,0 +1,5 @@
+int arr[10];
+float mat[5][3];
+char str[100];
+int a[5];
+
